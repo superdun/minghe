@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50718
 File Encoding         : 65001
 
-Date: 2017-06-26 12:32:22
+Date: 2017-06-26 15:27:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,6 +30,11 @@ CREATE TABLE `gzh` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
+-- Records of gzh
+-- ----------------------------
+INSERT INTO `gzh` VALUES ('1', '我是轻松小熊', 'JODB6/gzhtest.jpg', '1498400505.987', 'www.baidu.com', 'published');
+
+-- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -40,4 +45,9 @@ CREATE TABLE `user` (
   `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user
+-- ----------------------------
+INSERT INTO `user` VALUES ('1', 'admin', '1', 'ad9fcade604cec46094035c9e6422ae3\r\n');
 SET FOREIGN_KEY_CHECKS=1;
