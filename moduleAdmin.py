@@ -78,7 +78,7 @@ class GzhView(ModelView):
     }
     column_formatters = dict(created_at=lambda v, c, m, p: date_format(m.created_at),
                              img=lambda v, c, m, p: img_url_format(m.img))
-    form_columns = ("name", "url","img")
+    form_columns = ("name",'status', "url","img")
     form_excluded_columns = ('create_at')
     # create_template = 'admin/post/create.html'
     # edit_template = 'admin/post/edit.html'
