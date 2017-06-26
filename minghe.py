@@ -12,7 +12,7 @@ from flask_paginate import Pagination, get_page_args
 
 @app.route('/')
 def index():
-    return 'Hello World!'
+    return render_template("index.html")
 
 
 @app.route("/gzhindex")
