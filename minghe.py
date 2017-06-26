@@ -17,18 +17,29 @@ def index():
 
 @app.route("/gzhindex")
 def gzhIndex():
+    searchKey = request.args.get("s")
     previewThumb = app.config.get('PREVIEW_THUMBNAIL')
-    local_img_domain = "http://" +QINIU_DOMAIN
+    local_img_domain = "http://" + QINIU_DOMAIN
     page, per_page, offset = get_page_args()
     per_page = app.config.get('PER_PAGE')
-    total = len(Gzh.query.filter(Gzh.status == 'published').all())
-    items = Gzh.query.filter(Gzh.status == 'published').order_by('created_at desc').offset(offset).limit(
-        per_page).all()
-    print get_page_args()
-    pagination = Pagination(page=page, total=total,per_page=per_page)
-    return render_template('gzhIndex.html', items=items, pagination=pagination,
-                           tailThumb=previewThumb, local_img_domain=local_img_domain)
+    if not searchKey:
 
+        # total = len(Gzh.query.filter(Gzh.status == 'published').all())
+        # items = Gzh.query.filter(Gzh.status == 'published').order_by('created_at desc').offset(offset).limit(
+        #     per_page).all()
+        items = Gzh.query.filter(Gzh.status == 'published').order_by('created_at desc').all()
+
+    else:
+        print searchKey
+        # total = len(Gzh.query.filter(Gzh.status == 'published' and Gzh.name.like("%"+searchKey+"%")).all())
+        # items = Gzh.query.filter(Gzh.status == 'published' and Gzh.name.like("%"+searchKey+"%")).order_by('created_at desc').offset(offset).limit(
+        #     per_page).all()
+        items = Gzh.query.filter(Gzh.status == 'published' and Gzh.name.like("%" + searchKey + "%")).order_by(
+        'created_at desc').all()
+    # pagination = Pagination(page=page, total=total, per_page=per_page)
+    return render_template('gzhIndex.html', items=items,
+                           # pagination=pagination,
+                               tailThumb=previewThumb, local_img_domain=local_img_domain)
 
 
 # admin
@@ -114,6 +125,6 @@ def protected():
 def logout():
     flask_login.logout_user()
     return 'Logged out'
-
+application =app
 if __name__ == '__main__':
-    app.run()
+    application.run()
