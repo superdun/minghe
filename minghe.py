@@ -4,6 +4,8 @@ import thumb
 from moduleGlobal import app, qiniu_store, QINIU_DOMAIN, CATEGORY, UPLOAD_URL
 import moduleAdmin as admin
 import flask_login
+import hashlib
+from flask_paginate import Pagination, get_page_args
 
 
 
@@ -15,8 +17,17 @@ def index():
 
 @app.route("/gzhindex")
 def gzhIndex():
-    items = range(12)
-    return render_template("gzhIndex.html",items=items)
+    previewThumb = app.config.get('PREVIEW_THUMBNAIL')
+    local_img_domain = "http://" +QINIU_DOMAIN
+    page, per_page, offset = get_page_args()
+    per_page = app.config.get('PER_PAGE')
+    total = len(Gzh.query.filter(Gzh.status == 'published').all())
+    items = Gzh.query.filter(Gzh.status == 'published').order_by('created_at desc').offset(offset).limit(
+        per_page).all()
+    print get_page_args()
+    pagination = Pagination(page=page, total=total,per_page=per_page)
+    return render_template('gzhIndex.html', items=items, pagination=pagination,
+                           tailThumb=previewThumb, local_img_domain=local_img_domain)
 
 
 
@@ -82,7 +93,9 @@ def login():
     username = request.form['username']
     if username not in users:
         return 'wrong username'
-    if request.form['password'] == users[username]['password']:
+    md5 = hashlib.md5()
+    psswd = md5.update(request.form['password']).hexdigest()
+    if psswd == users[username]['password']:
         user = User()
         user.id = username
         flask_login.login_user(user)

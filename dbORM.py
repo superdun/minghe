@@ -17,12 +17,14 @@ class Gzh(db.Model):
     img = db.Column(db.String(120))
     created_at = db.Column(db.String(120))
     url = db.Column(db.String(120))
+    status = db.Column(db.String(120))
 
-    def __init__(self, name='', img='', created_at='', url=''):
+    def __init__(self, name='', img='', created_at='', url='',status="published"):
         self.name = name
         self.img = img
         self.url = url
         self.created_at = time.time()
+        self.status = status
 
     def __repr__(self):
         return '<Gzh %r>' % self.name

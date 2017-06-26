@@ -26,10 +26,10 @@
     <div class="gzhCardContainer col s4">
         <div class="card gzhCard">
             <div class="card-image">
-                <img src="{{ url_for('static',filename='img/gzhtest.jpg') }}">
+                <img src="{{ local_img_domain }}{{ item.img }}{{ tailThumb }}">
             </div>
             <div class="card-content">
-                <p class="ghzTitle">我是轻松小熊</p>
+                <a href="{{ item.url }}" class="ghzTitle">{{ item.name }}</a>
             </div>
         </div>
     </div>
@@ -38,21 +38,11 @@
         </div>
     {% endif %}
     {% endfor %}
-
-    <div class="row">
-        <div class="card gzhCard col s4">
-            <div class="card-image">
-                <img src="{{ url_for('static',filename='img/gzhtest.jpg') }}">
-            </div>
-            <div class="card-content">
-                <p class="ghzTitle">我是轻松小熊</p>
-            </div>
-        </div>
-    </div>
+    {{ pagination.links }}
 </div>
 
 
-</div>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
