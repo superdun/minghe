@@ -105,7 +105,8 @@ def login():
     if username not in users:
         return 'wrong username'
     md5 = hashlib.md5()
-    psswd = md5.update(request.form['password']).hexdigest()
+    md5.update(request.form['password'])
+    psswd = md5.hexdigest()
     if psswd == users[username]['password']:
         user = User()
         user.id = username
