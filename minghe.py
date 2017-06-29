@@ -126,6 +126,8 @@ def protected():
 def logout():
     flask_login.logout_user()
     return 'Logged out'
+from werkzeug.debug import DebuggedApplication
+app.wsgi_app = DebuggedApplication(app.wsgi_app, True)
 application =app
 if __name__ == '__main__':
     application.run()
