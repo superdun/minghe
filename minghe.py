@@ -1,3 +1,4 @@
+# -*- coding:utf-8 -*-  
 from flask import Flask,render_template,url_for,redirect,request
 from dbORM import db, User,Gzh
 import thumb
