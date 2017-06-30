@@ -35,7 +35,7 @@ def gzhIndex():
         # items = Gzh.query.filter(Gzh.status == 'published' and Gzh.name.like("%"+searchKey+"%")).order_by('created_at desc').offset(offset).limit(
         #     per_page).all()
         items = Gzh.query.filter(Gzh.status == 'published' and Gzh.name.like("%" + searchKey + "%")).order_by(
-        'created_at desc').all()
+        'created_at desc').first()
     # pagination = Pagination(page=page, total=total, per_page=per_page)
     return render_template('gzhIndex.html', items=items,
                            # pagination=pagination,
