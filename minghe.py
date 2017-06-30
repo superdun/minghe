@@ -31,7 +31,6 @@ def gzhIndex():
         items = Gzh.query.filter(Gzh.status == 'published').order_by('id desc').all()
 
     else:
-        print searchKey
         # total = len(Gzh.query.filter(Gzh.status == 'published' and Gzh.name.like("%"+searchKey+"%")).all())
         # items = Gzh.query.filter(Gzh.status == 'published' and Gzh.name.like("%"+searchKey+"%")).order_by('created_at desc').offset(offset).limit(
         #     per_page).all()
