@@ -21,8 +21,8 @@ def gzhIndex():
     searchKey = request.args.get("s")
     previewThumb = app.config.get('PREVIEW_THUMBNAIL')
     local_img_domain = "http://" + QINIU_DOMAIN
-    page, per_page, offset = get_page_args()
-    per_page = app.config.get('PER_PAGE')
+    # page, per_page, offset = get_page_args()
+    # per_page = app.config.get('PER_PAGE')
     if not searchKey:
 
         # total = len(Gzh.query.filter(Gzh.status == 'published').all())
@@ -34,8 +34,7 @@ def gzhIndex():
         # total = len(Gzh.query.filter(Gzh.status == 'published' and Gzh.name.like("%"+searchKey+"%")).all())
         # items = Gzh.query.filter(Gzh.status == 'published' and Gzh.name.like("%"+searchKey+"%")).order_by('created_at desc').offset(offset).limit(
         #     per_page).all()
-        items = Gzh.query.filter(Gzh.status == 'published' and Gzh.name.like("%" + searchKey + "%")).order_by(
-        'created_at desc').all()
+        tems = Gzh.query.filter(Gzh.status == 'published' and Gzh.name.like("%" + searchKey + "%")).first()
     # pagination = Pagination(page=page, total=total, per_page=per_page)
     return render_template('gzhIndex.html', items=items,
                            # pagination=pagination,
@@ -126,8 +125,8 @@ def protected():
 def logout():
     flask_login.logout_user()
     return 'Logged out'
-from werkzeug.debug import DebuggedApplication
-app.wsgi_app = DebuggedApplication(app.wsgi_app, True)
+# from werkzeug.debug import DebuggedApplication
+# app.wsgi_app = DebuggedApplication(app.wsgi_app, True)
 application =app
 if __name__ == '__main__':
     application.run()
