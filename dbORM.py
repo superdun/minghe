@@ -1,10 +1,11 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import time
+from moduleGlobal import app
 
-app = Flask(__name__, instance_relative_config=True)
-app.config.from_object('config')
-app.config.from_pyfile('localConfig.py')
+# app = Flask(__name__, instance_relative_config=True)
+# app.config.from_object('config')
+# app.config.from_pyfile('localConfig.py')
 db = SQLAlchemy(app)
 
 
