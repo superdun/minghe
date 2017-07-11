@@ -7,3 +7,6 @@
 #search{
     cursor: pointer;
 }
+.card-content{
+    text-align: center;
+}

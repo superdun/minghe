@@ -26,9 +26,12 @@
         {% endif %}
     <div class="gzhCardContainer col s4">
         <div class="card gzhCard">
-            <div class="card-image">
-                <img src="{{ local_img_domain }}{{ item.img }}{{ tailThumb }}">
-            </div>
+            <a href="{{ item.url }}">
+                <div class="card-image">
+                    <img src="{{ local_img_domain }}{{ item.img }}{{ tailThumb }}">
+                </div>
+            </a>
+
             <div class="card-content">
                 <a href="{{ item.url }}" class="ghzTitle">{{ item.name }}</a>
             </div>
@@ -39,9 +42,8 @@
         </div>
     {% endif %}
     {% endfor %}
-{#    {{ pagination.links }}#}
+    {#    {{ pagination.links }}#}
 </div>
-
 
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
